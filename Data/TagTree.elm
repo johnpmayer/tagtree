@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -}
 
-module Public.TagTree.TagTree where
+module Data.TagTree where
 
-import open Public.State.State
+import open Control.State
 
 data TagTree leaf node edge 
   = Leaf leaf
