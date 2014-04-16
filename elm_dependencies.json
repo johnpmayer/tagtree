@@ -1,0 +1,9 @@
+{ "version": "0.2.1"
+, "summary": "A rosetree with tagged leaves, nodes, and edges"
+, "description": "A rosetree with tagged leaves, nodes, and edges"
+, "license": "AGPL-3"
+, "repository": "https://github.com/johnpmayer/tagtree.git"
+, "exposed-modules": ["Data.TagTree"]
+, "elm-version": "0.12"
+, "dependencies": {}
+}

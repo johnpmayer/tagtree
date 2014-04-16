@@ -18,7 +18,14 @@
 
 module Data.TagTree where
 
-import open Control.State
+{-|
+
+Data.TagTree
+============
+
+-}
+
+import Control.State (..)
 
 data TagTree leaf node edge 
   = Leaf leaf
