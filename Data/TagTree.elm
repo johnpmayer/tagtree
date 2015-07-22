@@ -25,15 +25,15 @@ Data.TagTree
 
 -}
 
-import Control.State (..)
+import Control.State exposing (..)
 
-data TagTree leaf node edge 
+type TagTree leaf node edge 
   = Leaf leaf
-  | Node node [(edge, TagTree leaf node edge)]
+  | Node node (List (edge, TagTree leaf node edge))
 
 foldTagTree :
   (leaf -> a) ->
-  (node -> [a] -> a) ->
+  (node -> List a -> a) ->
   (edge -> a -> a) ->
   TagTree leaf node edge -> a
 foldTagTree fLeaf fNode fEdge tree =
@@ -41,11 +41,11 @@ foldTagTree fLeaf fNode fEdge tree =
       fChild (edge, child) = fEdge edge <| y child
   in case tree of
     Leaf leaf -> fLeaf leaf
-    Node node subs -> fNode node <| map fChild subs
+    Node node subs -> fNode node <| List.map fChild subs
 
 foldTagTree' :
   (leaf -> a) ->
-  (node -> [(edge,a)] -> a) ->
+  (node -> List (edge,a) -> a) ->
   TagTree leaf node edge -> a
 foldTagTree' fLeaf fNode tree =
   let y = foldTagTree' fLeaf fNode
@@ -53,7 +53,7 @@ foldTagTree' fLeaf fNode tree =
     Leaf leaf -> fLeaf leaf
     Node node subs -> 
       let mapAttach f (attach, s) = (attach, f s) 
-          subs' = map (mapAttach y) subs
+          subs' = List.map (mapAttach y) subs
       in fNode node subs'
 
 walkModify :
